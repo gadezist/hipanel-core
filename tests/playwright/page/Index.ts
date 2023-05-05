@@ -30,7 +30,7 @@ export default class Index {
 
   async seeTextOnTable(columnName: string, row: number, text: string) {
     const column = await this.getColumnNumberByName(columnName);
-    await expect(this.page.locator(`//tr[${row}]//td[${column}]`)).toHaveText(text);
+    await expect(this.page.locator(`//tbody//tr[${row}]//td[${column}]`)).toHaveText(text);
   }
 
   async chooseNumberRowOnTable(number: number) {
@@ -60,7 +60,7 @@ export default class Index {
 
   async clickColumnOnTable(columnName: string, row: number) {
     const column = await this.getColumnNumberByName(columnName);
-    await this.page.locator(`//tr[${row}]//td[${column}]//a`).click();
+    await this.page.locator(`//tr[${row}]//td[${column}]//a[1]`).click();
   }
 
   async clickLinkOnTable(columnName: string, link: string) {
@@ -92,6 +92,8 @@ export default class Index {
   }
 
   private getRowNumber(rows: Array<string>, value: string) {
+    console.log(rows);
+    console.log(value);
     let rowNumber = 0;
     rows.forEach((rowValue, index) => {
       if (rowValue === value) {
@@ -99,7 +101,7 @@ export default class Index {
       }
     });
     if (rowNumber === 0) {
-      expect(false, `column by name "${value}" does not exist`).toBeTruthy();
+      expect(false, `Field by name "${value}" does not exist`).toBeTruthy();
     }
 
     return rowNumber;
