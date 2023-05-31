@@ -35,7 +35,7 @@ export default class Select2 {
   async clickFirstOnTheList() {
     await this.combobox.click();
     await this.page.locator("ul.select2-results__options .loading-results").waitFor({ state: "hidden" });
-    await this.page.locator(`//ul[contains(@class, 'select2-results__options')]/li`).click();
+    await this.page.locator(`//ul[contains(@class, 'select2-results__options')]/li`).first().click();
   }
 }
 
